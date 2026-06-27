@@ -203,6 +203,12 @@ h1 {
   margin-bottom: 14px;
 }
 
+.entry-body .entry-meta-sans {
+  font-family: var(--);
+  font-size: 90%;
+  color: var(--soft);
+}
+
 .entry-body p {
   margin: 0 0 14px;
   max-width: 780px;
