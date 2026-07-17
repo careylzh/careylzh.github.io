@@ -24,6 +24,11 @@ body {
   overflow-x: clip;
 }
 
+main {
+  position: relative;
+  z-index: 1;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -41,6 +46,30 @@ img {
   background: rgba(251, 251, 250, 0.96);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid #d9d9d9;
+}
+
+.symbol-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.floating-symbol {
+  position: absolute;
+  left: var(--left);
+  top: var(--top);
+  color: var(--symbol-color);
+  font-family: var(--sans);
+  font-size: var(--size);
+  font-weight: 500;
+  line-height: 1;
+  opacity: var(--symbol-opacity);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--symbol-color) 38%, transparent);
+  animation: float-symbol var(--duration) ease-in-out var(--delay) infinite alternate;
+  will-change: transform;
 }
 
 .header-inner {
@@ -328,6 +357,20 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .floating-symbol {
+    animation: none;
+  }
+}
+
+@keyframes float-symbol {
+  from {
+    transform: translate3d(0, 34px, 0) rotate(-16deg) scale(0.92);
+  }
+
+  to {
+    transform: translate3d(var(--drift), -120px, 0) rotate(38deg) scale(1.08);
   }
 }
 

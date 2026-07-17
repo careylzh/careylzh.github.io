@@ -1,5 +1,39 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+const symbolColors = [
+  "#d98fa8",
+  "#b7a0d9",
+  "#dfa58c",
+  "#8db9ad",
+  "#91acd0",
+  "#d5ba70",
+];
+
+function createSymbolField() {
+  const field = document.createElement("div");
+  field.className = "symbol-field";
+  field.setAttribute("aria-hidden", "true");
+
+  Array.from({ length: 34 }, (_, index) => {
+    const symbol = document.createElement("span");
+    symbol.className = "floating-symbol";
+    symbol.textContent = "ᯅ";
+    symbol.style.setProperty("--left", `${(index * 29 + 7) % 101}%`);
+    symbol.style.setProperty("--top", `${(index * 41 + 3) % 103}%`);
+    symbol.style.setProperty("--size", `${18 + ((index * 13) % 48)}px`);
+    symbol.style.setProperty("--duration", `${13 + ((index * 17) % 22)}s`);
+    symbol.style.setProperty("--delay", `${-((index * 11) % 25)}s`);
+    symbol.style.setProperty("--drift", `${-80 + ((index * 37) % 161)}px`);
+    symbol.style.setProperty("--symbol-color", symbolColors[index % symbolColors.length]);
+    symbol.style.setProperty("--symbol-opacity", `${0.09 + ((index * 3) % 11) / 100}`);
+    field.append(symbol);
+  });
+
+  document.body.prepend(field);
+}
+
+createSymbolField();
+
 const scrollLayers = [
   ...document.querySelectorAll(
     ".hero-illustration, .hero-copy, .section-heading, .entry, .teaching-entry"
