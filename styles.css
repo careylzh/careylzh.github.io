@@ -309,15 +309,19 @@ h1 {
   text-transform: uppercase;
 }
 
-/* JavaScript progressively enhances these blocks with a soft parallax transition. */
+/* JavaScript progressively enhances these blocks with an ink-like scroll dissolve. */
 .scroll-motion .hero-illustration,
 .scroll-motion .hero-copy,
 .scroll-motion .section-heading,
 .scroll-motion .entry,
 .scroll-motion .teaching-entry {
   opacity: var(--scroll-opacity, 1);
-  transform: translate3d(0, var(--scroll-offset, 0), 0);
-  filter: blur(var(--scroll-blur, 0));
+  transform: translate3d(0, var(--scroll-offset, 0), 0)
+    scale(var(--scroll-scale, 1));
+  filter: blur(var(--scroll-blur, 0))
+    saturate(var(--scroll-saturation, 1))
+    contrast(var(--scroll-contrast, 1));
+  transform-origin: center;
   will-change: transform, opacity, filter;
 }
 
